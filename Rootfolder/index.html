@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Search Bar</title>
+    <script src="jquery.js"></script>
+<style>
+* {
+   box-sizing: border-box;
+   font-family: Arial;
+}
+body{
+    background-color: #fbe3e3;
+}
+h2{
+    font-size: 4vh;
+}
+#search {
+    background-image: url('search.png');
+    background-position: right;
+    background-size: 4vh 4vh;
+    background-repeat: no-repeat;
+    width: 85vw;
+    font-size: 2.4vh;
+    padding: 12px 20px 12px 12px;
+    border: solid 1.5px;
+    border-radius: 1vh;
+    margin-bottom: 12px;
+}
+#search:hover{
+    border: solid 0.35vh;
+}
+
+#names {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 85vw;
+}
+
+#names li a {
+  border: 1px solid #ddd;
+  margin-top: 0.5vh; /* Prevent double borders */
+  background-color: #fbfbfb;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 2.3vh;
+  color: black;
+  display: block
+}
+.after{
+    display: none;
+    font-size: 4vh;
+    font-weight: 600;
+    padding-top: 3vh;
+}
+#names li a:hover:not(.header) {
+    background-color: black;
+    color: white;
+}
+</style>
+</head>
+<body>
+
+<div class="whole">
+<h2>My Search Bar</h2>
+
+<input type="text" id="search" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+<div class="after"></div>
+<ul id="names">
+  <li><a href="#">Abhishek</a></li>
+  <li><a href="#">Ajay</a></li>
+  <li><a href="#">Sushma</a></li>
+  <li><a href="#">Ankita</a></li>
+  <li><a href="#">Nitish</a></li>
+  <li><a href="#">Apoorv</a></li>
+  <li><a href="#">Surbhi</a></li>
+  <li><a href="#">Manav</a></li>
+  <li><a href="#">Sourav</a></li>
+  <li><a href="#">Reva</a></li>
+  <li><a href="#">Sujaya</a></li>
+  <li><a href="#">Camelia</a></li>
+</ul>
+</div>
+
+<script>
+function myFunction() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("search");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("names");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+$(document).ready(function (){
+   $("#names li").click(function () {
+       $("#names").fadeOut();
+       $(".after").fadeIn().text("Hi! My name is "+$(this).text());
+       });
+   $(".after").click(function () {
+       $(".after").fadeOut();
+       $("#names").fadeIn();
+   });
+   $("#search").click(function () {
+       $(".after").fadeOut();
+       $("#names").fadeIn();
+   });
+});
+</script>
+</body>
+</html>
